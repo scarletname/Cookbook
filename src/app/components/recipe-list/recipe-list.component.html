@@ -1,1 +1,9 @@
-<p>recipe-list works!</p>
+<div class="recipe-container">
+  <mat-card *ngFor="let recipe of recipes" class="recipe-cards">
+    <mat-card-title>{{ recipe.title }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ recipe.description }}</p>
+      <p><small>Дата создания: {{ recipe.createdAt | date:'short' }}</small></p>
+    </mat-card-content>
+  </mat-card>
+</div>
