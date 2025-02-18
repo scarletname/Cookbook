@@ -1,34 +1,23 @@
-import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-interface Recipe {
-  id: string;
-  title: string;
-  ingredients: { name: string; amount: number; unit: string }[];
-  description: string;
-  imageUrl?: string;
-  createdAt: Date;
-}
+import { RecipeListComponent } from './recipe-list.component';
 
-@Component({
-  selector: 'app-recipe-list',
-  templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.scss']
-})
-export class RecipeListComponent {
-  recipes: Recipe[] = [
-    {
-      id: '1',
-      title: 'Блины',
-      ingredients: [],
-      description: '---',
-      createdAt: new Date()
-    },
-    {
-      id: '2',
-      title: 'Панкейки',
-      ingredients: [],
-      description: '---',
-      createdAt: new Date()
-    }
-  ];
-}
+describe('RecipeListComponent', () => {
+  let component: RecipeListComponent;
+  let fixture: ComponentFixture<RecipeListComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [RecipeListComponent]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(RecipeListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
