@@ -1,9 +1,11 @@
 .recipe-container {
+  color: white;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
 .recipe-card {
+  color: darkgoldenrod;
   max-width: 400px;
 }
