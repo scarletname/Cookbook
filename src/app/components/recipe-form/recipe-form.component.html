@@ -1,1 +1,38 @@
-<p>recipe-form works!</p>
+<mat-card>
+  <mat-card-title>Создать/Редактировать рецепт</mat-card-title>
+  <mat-card-content>
+    <form>
+      <mat-form-field class="full-width">
+        <mat-label>Название</mat-label>
+        <input matInput [(ngModel)]="recipe.title" name="title">
+      </mat-form-field>
+
+      <div *ngFor="let ingredient of recipe.ingredients; let i = index">
+        <mat-form-field>
+          <mat-label>Ингредиент</mat-label>
+          <input matInput [(ngModel)]="ingredient.name" name="ingredient{{i}}">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Количество</mat-label>
+          <input type="number" matInput [(ngModel)]="ingredient.amount" name="amount{{i}}">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Единица измерения</mat-label>
+          <mat-select [(ngModel)]="ingredient.unit" name="unit{{i}}">
+            <mat-option *ngFor="let unit of units" [value]="unit">{{ unit }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button color="warn" (click)="removeIngredient(i)">Удалить</button>
+      </div>
+
+      <button mat-button color="primary" (click)="addIngredient()">Добавить ингредиент</button>
+      <br><br>
+      <mat-form-field class="full-width">
+        <mat-label>Описание</mat-label>
+        <textarea matInput [(ngModel)]="recipe.description" name="description"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" (click)="saveRecipe()">Сохранить</button>
+    </form>
+  </mat-card-content>
+</mat-card>
