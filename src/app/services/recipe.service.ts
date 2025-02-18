@@ -35,4 +35,9 @@ export class RecipeService {
     this.recipes.push(recipe);
     this.recipesSubject.next(this.recipes);
   }
+
+  deleteRecipe(id: string) {
+    this.recipes = this.recipes.filter(recipe => recipe.id !== id);
+    this.recipesSubject.next(this.recipes);
+  }
 }

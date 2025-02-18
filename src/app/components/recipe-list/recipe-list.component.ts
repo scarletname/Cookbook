@@ -20,4 +20,8 @@ export class RecipeListComponent implements OnInit {
       this.recipes = data;
     });
   }
+
+  deleteRecipe(id: string) {
+    this.recipeService.deleteRecipe(id);
+  }
 }
