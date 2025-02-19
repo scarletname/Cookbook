@@ -6,38 +6,37 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class RecipeService {
-  private recipes: Recipe[] = [
-    {
-      id: '1',
-      title: 'Блины',
-      ingredients: [],
-      description: '---',
-      createdAt: new Date()
-    },
-    {
-      id: '2',
-      title: 'Панкейки',
-      ingredients: [],
-      description: '---',
-      createdAt: new Date()
-    }
-  ];
-  private recipesSubject = new BehaviorSubject<Recipe[]>(this.recipes);
-  recipes$=this.recipesSubject.asObservable();
+  private recipes: Recipe[] = [];
+
+  private recipesSubject = new BehaviorSubject<Recipe[]>(this.loadRecipes());
+  recipes$ = this.recipesSubject.asObservable();
+
+  constructor() {}
+
+  private loadRecipes(): Recipe[] {
+    const data = localStorage.getItem('recipes');
+    return data ? JSON.parse(data) : [];
+  }
+
+  private saveRecipes() {
+    localStorage.setItem('recipes', JSON.stringify(this.recipes));
+  }
 
   getRecipes() {
     return this.recipes$;
   }
 
   addRecipe(recipe: Recipe) {
-    recipe.id = (this.recipes.length + 1).toString();
+    recipe.id = Date.now().toString();
     recipe.createdAt = new Date();
     this.recipes.push(recipe);
+    this.saveRecipes(); // Сохраняем в localStorage
     this.recipesSubject.next(this.recipes);
   }
 
   deleteRecipe(id: string) {
     this.recipes = this.recipes.filter(recipe => recipe.id !== id);
+    this.saveRecipes(); // Сохраняем после удаления
     this.recipesSubject.next(this.recipes);
   }
 }
