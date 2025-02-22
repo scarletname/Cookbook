@@ -26,7 +26,10 @@ export class RecipeListComponent {
   }
 
   deleteRecipe(id: string) {
-    this.recipeService.deleteRecipe(id);
+    const confirmed = window.confirm('Вы уверены, что хотите удалить этот рецепт?');
+    if (confirmed) {
+      this.recipeService.deleteRecipe(id);
+    }
   }
 
   editRecipe(recipe: Recipe) {
