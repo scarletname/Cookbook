@@ -45,7 +45,8 @@ export class RecipeFormComponent implements OnChanges {
   }
 
   removeIngredient(index: number) {
-    if (this.recipe) {
+    const confirmed = window.confirm('Вы уверены, что хотите удалить этот ингредиент?');
+    if (confirmed && this.recipe) {
       this.recipe.ingredients.splice(index, 1);
     }
   }
