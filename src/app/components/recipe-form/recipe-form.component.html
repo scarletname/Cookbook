@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="recipe">
   <mat-card-title>Создать/Редактировать рецепт</mat-card-title>
   <mat-card-content>
     <form>
@@ -7,7 +7,7 @@
         <input matInput [(ngModel)]="recipe.title" name="title">
       </mat-form-field>
 
-      <div *ngFor="let ingredient of recipe.ingredients; let i = index">
+      <div *ngFor="let ingredient of recipe.ingredients; let i = index" class="ingredient-group">
         <mat-form-field>
           <mat-label>Ингредиент</mat-label>
           <input matInput [(ngModel)]="ingredient.name" name="ingredient{{i}}">
@@ -25,7 +25,7 @@
         <button mat-button color="warn" (click)="removeIngredient(i)">Удалить</button>
       </div>
 
-      <button mat-button color="primary" (click)="addIngredient()">Добавить ингредиент</button>
+      <button mat-button color="primary" (click)="addIngredient()" type="button">Добавить ингредиент</button>
       <br><br>
       <mat-form-field class="full-width">
         <mat-label>Описание</mat-label>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RecipeListComponent } from './components/recipe-list/recipe-list.component';
 import { RecipeFormComponent } from './components/recipe-form/recipe-form.component';
+import { Recipe } from './models/recipe';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,9 @@ import { RecipeFormComponent } from './components/recipe-form/recipe-form.compon
 })
 export class AppComponent {
   title = 'cookbook';
+  selectedRecipe: Recipe | null = null;
+
+  editRecipe(recipe: Recipe) {
+    this.selectedRecipe = { ...recipe };
+  }
 }

@@ -1,9 +1,9 @@
 <div class="container">
   <h1>Поваренная книга</h1>
 
-  <app-recipe-form></app-recipe-form>
+  <app-recipe-form [recipe]="selectedRecipe"></app-recipe-form>
 
   <hr>
 
-  <app-recipe-list></app-recipe-list>
+  <app-recipe-list (edit)="editRecipe($event)"></app-recipe-list>
 </div>
