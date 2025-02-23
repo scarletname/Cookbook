@@ -7,11 +7,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-recipe-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule, MatCardModule, MatSelectModule],
+  imports: [CommonModule, FormsModule, MatInputModule, MatButtonModule, MatCardModule, MatSelectModule, MatDialogModule],
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.scss']
 })
@@ -20,7 +22,7 @@ export class RecipeFormComponent implements OnChanges {
 
   units = ['г', 'мл', 'шт', 'ч.л.', 'ст.л.'];
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService, private dialog: MatDialog) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['recipe'] && !this.recipe) {
@@ -62,10 +64,16 @@ export class RecipeFormComponent implements OnChanges {
   }
 
   removeIngredient(index: number) {
-    const confirmed = window.confirm('Вы уверены, что хотите удалить этот ингредиент?');
-    if (confirmed && this.recipe) {
-      this.recipe.ingredients.splice(index, 1);
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Вы уверены, что хотите удалить этот ингредиент?' }
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result && this.recipe) {
+        this.recipe.ingredients.splice(index, 1);
+      }
+    });
   }
 
   saveRecipe() {

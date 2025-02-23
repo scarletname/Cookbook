@@ -4,11 +4,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RecipeService } from '../../services/recipe.service';
 import { Recipe } from '../../models/recipe';
+import { MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatDialogModule],
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.scss']
 })
@@ -17,7 +19,7 @@ export class RecipeListComponent {
 
   @Output() edit = new EventEmitter<Recipe>();
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(private recipeService: RecipeService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.recipeService.getRecipes().subscribe(data => {
@@ -27,10 +29,15 @@ export class RecipeListComponent {
   }
 
   deleteRecipe(id: string) {
-    const confirmed = window.confirm('Вы уверены, что хотите удалить этот рецепт?');
-    if (confirmed) {
-      this.recipeService.deleteRecipe(id);
-    }
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '300px',
+      data: { message: 'Вы уверены, что хотите удалить этот рецепт?' }
+    });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.recipeService.deleteRecipe(id);
+      }
+    });
   }
 
   editRecipe(recipe: Recipe) {
