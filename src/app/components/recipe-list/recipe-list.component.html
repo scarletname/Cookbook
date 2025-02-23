@@ -6,8 +6,8 @@
       <p><small>Дата создания: {{ recipe.createdAt | date:'short' }}</small></p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="editRecipe(recipe)">Редактировать</button>
-      <button mat-raised-button color="warn" (click)="deleteRecipe(recipe.id)">Удалить</button>
+      <button mat-button color="primary" (click)="editRecipe(recipe)">Редактировать</button>
+      <button mat-button color="warn" (click)="deleteRecipe(recipe.id)">Удалить</button>
     </mat-card-actions>
   </mat-card>
 </div>

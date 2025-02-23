@@ -1,3 +1,7 @@
+mat-card-title {
+  margin-top: 12px;
+}
+
 .recipe-container {
   color: white;
   display: flex;
@@ -10,3 +14,7 @@
   color: white;
 }
 
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
