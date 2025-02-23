@@ -7,6 +7,13 @@
         <input matInput [(ngModel)]="recipe.title" name="title">
       </mat-form-field>
 
+      <div class="image-upload">
+        <input type="file" (change)="onFileSelected($event)" accept="image/*">
+        <div class="image-preview" *ngIf="recipe.imageUrl">
+          <img [src]="recipe.imageUrl" alt="Изображение рецепта" class="recipe-image">
+        </div>
+      </div>
+
       <div *ngFor="let ingredient of recipe.ingredients; let i = index" class="ingredient-group">
         <mat-form-field>
           <mat-label>Ингредиент</mat-label>

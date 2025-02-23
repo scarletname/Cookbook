@@ -28,13 +28,30 @@ export class RecipeFormComponent implements OnChanges {
     }
   }
 
+  onFileSelected(event: Event) {
+    if (!this.recipe) return;
+
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (this.recipe) {
+          this.recipe.imageUrl = reader.result as string;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+
   getEmptyRecipe(): Recipe {
     return {
       id: '',
       title: '',
       ingredients: [{ name: '', amount: 0, unit: '' }],
       description: '',
-      createdAt: new Date()
+      createdAt: new Date(),
+      imageUrl: ''
     };
   }
 
