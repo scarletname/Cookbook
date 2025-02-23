@@ -20,8 +20,11 @@ Once the server is running, open your browser and navigate to `http://localhost:
 
 ![recipe form with picture](./images/f2.png)
 
-![confirmation of deletion ingredient](./images/delin.png)
+<p align="center">
+  <img src="./images/delin.png" alt="confirmation of deletion ingredient" width="300">
+  <img src="./images/delr.png" alt="confirmation of deletion recipe" width="300">
+</p>
 
-![confirmation of deletion recipe](./images/delr.png)
-
-![tab](./images/vk.png)
+<p align="center">
+  <img src="./images/vk.png" alt="tab" width="300">
+</p>
